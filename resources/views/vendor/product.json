@@ -1,0 +1,39 @@
+{
+    "id": 1,
+    "string_id": "doloribus-sequi-et",
+    "name": "doloribus sequi et",
+    "description": "labore ut illo dicta nihil non aliquam aut qui repudiandae quis alias facilis fuga veritatis modi quia eligendi ipsam itaque non vel voluptatem molestiae amet est doloremque itaque velit iure qui consequatur nihil facere consectetur perspiciatis facilis corporis voluptatum at culpa optio dolorem consequatur officia illum qui iure quas at eaque dolore ut quia saepe autem quas doloribus veritatis labore fugit consequatur dolorum quia tempora ea optio molestias voluptatem ducimus voluptas nemo at facere tenetur sunt debitis quia necessitatibus sit",
+    "tags": "cumque, voluptatem, ipsam, ipsam, quia, eligendi, occaecati, vel, et, voluptatem, ut, praesentium, dignissimos, non, iure, officia, error, aut, est, enim",
+    "unit": "kg",
+    "rating": 61,
+    "orders": 2505,
+    "stock": 296,
+    "price": 840,
+    "delivery_min": 2,
+    "delivery_max": 5,
+    "thumbnail": "12-2.jpg",
+    "created_at": "2019-02-05T23:37:11.000000Z",
+    "category": {
+        "product_id": 1,
+        "category_id": 4,
+        "subcategory_id": 39,
+        "sub_subcategory_id": null
+    },
+    "photos": [{
+        "id": 1,
+        "product_id": 1,
+        "name": "product-5.jpg"
+    }, {
+        "id": 2,
+        "product_id": 1,
+        "name": "product-2.jpg"
+    }, {
+        "id": 3,
+        "product_id": 1,
+        "name": "11.jpg"
+    }, {
+        "id": 4,
+        "product_id": 1,
+        "name": "white-corn.png"
+    }]
+}
