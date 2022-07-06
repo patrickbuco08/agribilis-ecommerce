@@ -8,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf_token" content={{ csrf_token() }}>
 
+    <meta property="og:site_name" content="E-Commerce Web Application">
+    <meta property="og:title" content="AgriBilis Philippines">
+    <meta property="og:url" content="{{ route('home') }}">
+    <meta property="og:description" content="A website and mobile‑based application that will help in the marketing and distribution of agriculture
+    and fishery products in Cavite, linking the farmers, fishers, and traders to the consumers for the transfer of consumer
+    goods.">
+    <meta property="og:image" content="{{ asset('og_agribilis.jpg') }}">
+    <meta property="og:image:url" content="{{ asset('og_agribilis.jpg') }}">
+    <meta property="twitter:image" content="{{ asset('og_agribilis.jpg') }}">
+
     <title>{{ $title ?? 'Agribilis' }}</title>
 
     <link href={{ asset('frontend/images/logos/agribilis-logo.png') }} rel="shortcut icon" type="image/x-icon">

@@ -26,15 +26,21 @@ class RegisterController extends Controller
     {
         $validated = $request->safe();
         try {
+            DB::beginTransaction();
+
             $user = User::create([
                 'full_name' => $validated['full_name'],
                 'email'     => $validated['email'],
                 'password'  =>  Hash::make($validated['password']),
-            ])->role([
+            ]);
+
+            $user->role()->create([
                 'role_id' => 3
             ]);
+            DB::commit();
             auth()->attempt($request->only('email', 'password'), true);
         } catch (\Throwable $th) {
+            DB::rollback();
             return back()->with('error', 'Something went wrong');
         }
         return redirect()->route('home');

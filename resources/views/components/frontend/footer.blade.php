@@ -5,8 +5,11 @@
                 <aside class="col-md-4">
                     <article class="mr-3">
                         <img src={{ asset('frontend/images/logos/agribilis-logo.png') }} class="logo-footer">
-                        <p class="mt-3">Some short text about company like You might remember the Dell computer
-                            commercials in which a youth reports this exciting news to his friends.</p>
+                        <p class="mt-3">A website and mobile based application that will help in the marketing and
+                            distribution of agriculture
+                            and fishery products in Cavite, linking the farmers, fishers, and traders to the consumers
+                            for the transfer of consumer
+                            goods.</p>
                         <div>
                             <a class="btn btn-icon btn-light" title="Facebook" target="_blank" href="#"><i
                                     class="fab fa-facebook-f"></i></a>
