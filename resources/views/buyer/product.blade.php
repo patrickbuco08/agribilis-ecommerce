@@ -8,8 +8,8 @@
                 <div class="card">
                     <article class="gallery-wrap">
                         <div class="img-big-wrap">
-                            <span href="#"><img src={{ asset('frontend/images/items/'.$product->thumbnail.'') }}
-                                    id="main-thumbnail" /></span>
+                            <a href="#"><img src={{ asset('frontend/images/items/'.$product->thumbnail.'') }}
+                                    id="main-thumbnail" /></a>
                         </div>
                         <div class="thumbs-wrap">
                             @foreach ($product->photos as $photo)

@@ -123,11 +123,11 @@ Route::prefix('vendor')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         Route::get('product/add', [ProductController::class, 'vendorIndex'])->name('add-product');
+        Route::post('product/add', [ProductController::class, 'storeProduct']);
         Route::get('product/{product:string_id}/edit', [ProductController::class, 'showEditProduct'])->name('edit-product');
         Route::post('product/{product:string_id}/edit', [ProductController::class, 'updateProduct']);
 
         Route::get('product-list', [ProductController::class, 'productList'])->name('product-list');
-        Route::post('add-product', [ProductController::class, 'storeProduct'])->name('store-product');
 
         Route::get('/order/{transaction}', [OrderController::class, 'orderDetail'])->name('order.detail');
         Route::put('/order/{order}/cancel-order', [OrderController::class, 'cancelOrder'])->name('order.cancel');

@@ -143,8 +143,9 @@ class ProductController extends Controller
         return "under construction";
     }
 
-    public function storeProduct(AddProductRequest $request)
+    public function storeProduct(Request $request)
     {
+        return $request->all();
         $validated = $request->safe();
         $validated->tags = collect(json_decode($validated->tags))->map(function($tag){
             return $tag->value;
