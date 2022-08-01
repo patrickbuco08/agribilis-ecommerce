@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddProductRequest;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\SubCategory;
-use App\Models\SubSubCategory;
 use Carbon\Carbon;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use App\Models\SubSubCategory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\AddProductRequest;
 
 
 class ProductController extends Controller
@@ -143,9 +143,8 @@ class ProductController extends Controller
         return "under construction";
     }
 
-    public function storeProduct(Request $request)
+    public function storeProduct(AddProductRequest $request)
     {
-        return $request->all();
         $validated = $request->safe();
         $validated->tags = collect(json_decode($validated->tags))->map(function($tag){
             return $tag->value;
