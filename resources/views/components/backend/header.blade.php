@@ -3,7 +3,7 @@
     <div class="col-brand">
         @guest
         <a href="# class=" brand-wrap">
-            <img src="{{ asset('frontend/images/logos/agribilis-logo.png') }}" height="46" class="logo"
+            <img src="{{ asset('frontend/images/logos/agribilis-logo.jpg') }}" height="46" class="logo"
                 alt="AgriBilis Logo">
         </a>
         @endguest

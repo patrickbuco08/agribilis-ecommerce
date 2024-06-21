@@ -20,7 +20,7 @@
 
     <title>{{ $title ?? 'Agribilis' }}</title>
 
-    <link href={{ asset('frontend/images/logos/agribilis-logo.png') }} rel="shortcut icon" type="image/x-icon">
+    <link href={{ asset('frontend/images/logos/agribilis-logo.jpg') }} rel="shortcut icon" type="image/x-icon">
 
     <script src={{ asset('frontend/js/jquery-2.0.0.min.js') }} type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

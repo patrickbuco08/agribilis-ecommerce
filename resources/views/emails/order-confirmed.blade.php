@@ -338,7 +338,7 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
                                 <td class="logo" align="center">
-                                    <a href="#"><img src="{{ asset('frontend/images/logos/agribilis-logo.png') }}"
+                                    <a href="#"><img src="{{ asset('frontend/images/logos/agribilis-logo.jpg') }}"
                                             width="100" alt="AgriBilis Logo"></a>
                                 </td>
                             </tr>

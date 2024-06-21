@@ -45,7 +45,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-2 col-6">
-                <a class="navbar-brand" href="#"><img src={{ asset('frontend/images/logos/agribilis-logo.png') }}
+                <a class="navbar-brand" href="#"><img src={{ asset('frontend/images/logos/agribilis-logo.jpg') }}
                         class="logo"></a>
             </div>
             <div class="col-lg-8 col-12 col-sm-12">
