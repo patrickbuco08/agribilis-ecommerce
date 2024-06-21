@@ -22,7 +22,8 @@ class OrderController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function getOrders($status){
+    public function getOrders($status)
+    {
         $orders = GroupOrder::with(['billingDetails', 'mainStatus', 'items', 'items.product', 'items.status', 'items.status.info'])->where([
             'user_id' => auth()->user()->id
         ]);
@@ -30,31 +31,34 @@ class OrderController extends Controller
         return $orders->get();
     }
 
-    public function index($status = null){
+    public function index($status = null)
+    {
         $status = !$status ?? 'pending';
-        return view('buyer.orders',[
+        return view('buyer.orders', [
             'orders' => $this->getOrders($status)
         ]);
     }
 
-    public function orderSuccess(Request $request){
+    public function orderSuccess(Request $request)
+    {
         if (!$request->session()->has('order')) {
-            return redirect()->route('home'); 
+            return redirect()->route('home');
         }
         return view('buyer.order-success');
     }
 
-    public function orderStatus(GroupOrder $order, GroupOrderItem $item){
+    public function orderStatus(GroupOrder $order, GroupOrderItem $item)
+    {
 
-        if(!$order->ownedBy(auth()->user())){
+        if (!$order->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
-        if(!$order->hasItem($item)){
+        if (!$order->hasItem($item)) {
             return response(null, 409);
         }
 
-        return view('buyer.order-status',[
+        return view('buyer.order-status', [
             'order' => $order,
             'item' => $item->load(['product', 'status', 'status.info', 'groupOrder', 'product.owner', 'product.owner.info'])
         ]);
@@ -62,7 +66,7 @@ class OrderController extends Controller
 
     public function orderDetail(Transaction $transaction)
     {
-        if(!$transaction->ownedBy(auth()->user())){
+        if (!$transaction->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
@@ -71,7 +75,7 @@ class OrderController extends Controller
         });
 
         $transaction = $transaction->load(['order', 'order.owner', 'order.billingDetails', 'order.items', 'order.items.product', 'order.items.status', 'order.items.status.info']);
-        return view('vendor.order-detail',[
+        return view('vendor.order-detail', [
             'transaction' => $transaction,
             'status' => $status
         ]);
@@ -85,7 +89,7 @@ class OrderController extends Controller
             'status' => 'required|string'
         ]);
 
-        if(!$transaction->ownedBy(auth()->user())){
+        if (!$transaction->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
@@ -97,7 +101,7 @@ class OrderController extends Controller
                 'status_id' => $request->status == 'approved' ? 2 : 5
             ]);
 
-            $items = collect($transaction->order->items)->map(function($item){
+            $items = collect($transaction->order->items)->map(function ($item) {
                 return $item->id;
             });
 
@@ -105,7 +109,7 @@ class OrderController extends Controller
                 'status_id' => $request->status == 'approved' ? 2 : 5
             ]);
 
-            if($request->status == 'approved'){
+            if ($request->status == 'approved') {
                 $transaction = $transaction->load(['order', 'order.owner', 'order.billingDetails', 'order.items', 'order.items.product']);
                 Mail::to($transaction->order->owner->email)->send(new OrderConfirmed($transaction->order));
             }
@@ -123,7 +127,7 @@ class OrderController extends Controller
             'status' => 'required|integer'
         ]);
 
-        if(!$transaction->ownedBy(auth()->user())){
+        if (!$transaction->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
@@ -134,7 +138,7 @@ class OrderController extends Controller
                 'status_id' => $request->status
             ]);
 
-            $items = collect($transaction->order->items)->map(function($item){
+            $items = collect($transaction->order->items)->map(function ($item) {
                 return $item->id;
             });
 
@@ -142,7 +146,7 @@ class OrderController extends Controller
                 'status_id' => $request->status
             ]);
 
-            if($request->status == 4){
+            if ($request->status == 4) {
                 $transaction = $transaction->load(['order', 'order.owner', 'order.billingDetails', 'order.items', 'order.items.product']);
                 Mail::to($transaction->order->owner->email)->send(new OrderDelivered($transaction->order));
             }

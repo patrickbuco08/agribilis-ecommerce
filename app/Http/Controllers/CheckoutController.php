@@ -16,19 +16,19 @@ class CheckoutController extends Controller
     {
         $this->middleware(['auth']);
     }
-    
-    public function index(){
 
+    public function index()
+    {
         $items = auth()->user()->cart->load(['product', 'product.owner', 'product.owner.info']);
         $groupedStores = $items->groupBy('product.owner.id');
 
         // return $groupedStores;
 
         $total = $items->reduce(function ($total, $item) {
-            return $total + $item->price*$item->quantity;
+            return $total + $item->price * $item->quantity;
         });
 
-        return view('buyer.checkout',[
+        return view('buyer.checkout', [
             'address' => auth()->user()->address,
             'groupedStores' => $groupedStores,
             'total' => $total,
@@ -46,16 +46,16 @@ class CheckoutController extends Controller
 
             $dt = new Carbon();
             $billingDetails = auth()->user()->address;
-            
+
             //loop the store
             foreach ($groupedStores as $store) {
 
-                $tracking_number = '#'.str_pad($store[0]->id + 1, 8, "0", STR_PAD_LEFT);
+                $tracking_number = '#' . str_pad($store[0]->id + 1, 8, "0", STR_PAD_LEFT);
 
-                $delivery_min = $store->max(function($item){
+                $delivery_min = $store->max(function ($item) {
                     return $item->product->delivery_min;
                 });
-                $delivery_max = $store->max(function($item){
+                $delivery_max = $store->max(function ($item) {
                     return $item->product->delivery_max;
                 });
 
@@ -76,7 +76,7 @@ class CheckoutController extends Controller
                     'phone' => $billingDetails->phone,
                     'postal_code' => $billingDetails->postal_code
                 ]);
-    
+
                 foreach ($store as $item) {
 
                     $orderItem = $order->items()->create([
@@ -109,5 +109,4 @@ class CheckoutController extends Controller
             return back();
         }
     }
-
 }

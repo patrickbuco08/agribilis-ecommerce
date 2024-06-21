@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AddAddressRequest;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\AddAddressRequest;
+use Illuminate\Support\Facades\Validator;
 
 class AddressController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware(['auth']);
     }
-    
-    public function index(){
-        return view('buyer.address',[
+
+    public function index()
+    {
+        return view('buyer.address', [
             'addresses' => auth()->user()->addresses
         ]);
     }
@@ -27,10 +30,12 @@ class AddressController extends Controller
         } catch (\Throwable $th) {
             return back()->with('failed', 'Ayayay!');
         }
+
         return back()->with('status', 'New Address Added');
     }
 
-    public function update(Request $request, Address $address){
+    public function update(Request $request, Address $address)
+    {
 
         $validator = Validator::make($request->all(), [
             'full_name' => 'required',
@@ -52,12 +57,12 @@ class AddressController extends Controller
         ]);
 
         return response()->json($address, 204);
-
     }
 
-    public function setAsDefault(Address $address){
+    public function setAsDefault(Address $address)
+    {
 
-        if(!$address->ownedBy(auth()->user())){
+        if (!$address->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
@@ -75,23 +80,20 @@ class AddressController extends Controller
 
             DB::commit();
             return back();
-
         } catch (\Throwable $th) {
             DB::rollback();
             return back();
         }
-
     }
 
-    public function destroy(Address $address){
+    public function destroy(Address $address)
+    {
 
-        if(!$address->ownedBy(auth()->user())){
+        if (!$address->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
         $address->delete();
         return back();
-
     }
-    
 }

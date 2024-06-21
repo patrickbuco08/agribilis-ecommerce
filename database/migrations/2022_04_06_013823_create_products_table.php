@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('unit', 10);
             $table->smallInteger('rating');
             $table->integer('orders');
+            $table->integer('order_limit');
             $table->integer('stock');
             $table->integer('price');
             $table->tinyInteger('delivery_min');

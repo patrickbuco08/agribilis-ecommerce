@@ -40,6 +40,10 @@
                         <textarea name='tags' class="form-control @error('tags') is-invalid @enderror">{{ old('tags') }}</textarea>
                     </div>
                     <div class="mb-4">
+                        <label class="form-label">Order Limit</label>
+                        <input type="text" name="order_limit" value="{{ old('order_limit') }}" placeholder="Type here" class="form-control @error('order_limit') is-invalid @enderror">
+                    </div>
+                    <div class="mb-4">
                         <div class="row">
                             <div class="col-6">
                             <label class="form-label">Unit</label>

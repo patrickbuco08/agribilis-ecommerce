@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\SubSubCategory;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function getCategory(Category $category){
+    public function getCategory(Category $category)
+    {
         return $category;
     }
 
@@ -22,7 +22,6 @@ class CategoryController extends Controller
     public function getSubSubCategory($subCategoryID)
     {
         $subSubCategories = SubSubCategory::where('subcategory_id', $subCategoryID)->get();
-        return response()->json($subSubCategories, 200);   
+        return response()->json($subSubCategories, 200);
     }
-
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
@@ -20,14 +19,13 @@ class CartController extends Controller
         $cartItems = auth()->user()->cart->load(['owner', 'product']);
 
         $total = $cartItems->reduce(function ($total, $item) {
-            return $total + $item->price*$item->quantity;
+            return $total + $item->price * $item->quantity;
         });
 
         return view('buyer.cart', [
             'cartItems' => $cartItems,
             'total' => $total
         ]);
-
     }
 
     public function store(Request $request, Product $product)
@@ -47,15 +45,14 @@ class CartController extends Controller
 
         $cart = Cart::where(['user_id' => auth()->user()->id, 'product_id' => $product->id])->first();
 
-        if($cart == null){
+        if ($cart == null) {
             $cart = Cart::create([
                 'user_id' => auth()->user()->id,
-                'product_id' =>$product->id,
+                'product_id' => $product->id,
                 'price' => $product->price,
                 'quantity' => $request->productQuantity
             ]);
-
-        }else{
+        } else {
             $cart->update([
                 'quantity' => $cart->quantity + $request->productQuantity
             ]);
@@ -69,7 +66,8 @@ class CartController extends Controller
     }
 
     //to check if the cart contains specific product
-    private function cartHasThisItem($product){
+    private function cartHasThisItem($product)
+    {
         $cart = Cart::where(['user_id' => auth()->user()->id, 'product_id' => $product->id])->first();
         return $cart != null ? true : false;
     }
@@ -90,10 +88,10 @@ class CartController extends Controller
         }
 
         //kapag ang user ay hindi pa naiaadd to cart ang item, then create that shit
-        if (!$this->cartHasThisItem($product)){
+        if (!$this->cartHasThisItem($product)) {
             $cart = Cart::create([
                 'user_id' => auth()->user()->id,
-                'product_id' =>$product->id,
+                'product_id' => $product->id,
                 'price' => $product->price,
                 'quantity' => $request->productQuantity
             ]);
@@ -102,10 +100,10 @@ class CartController extends Controller
         return response()->json(null, 200);
     }
 
-    public function updateQuantity(Cart $cart, Request $request){
-
+    public function updateQuantity(Cart $cart, Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'productQuantity' => 'required|integer',
+            'productQuantity' => 'required|integer|min:1',
         ]);
 
         //400 -> Bad Request
@@ -113,7 +111,7 @@ class CartController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        if(!$cart->ownedBy(auth()->user())){
+        if (!$cart->ownedBy(auth()->user())) {
             return response()->json(null, 409);
         }
 
@@ -132,14 +130,14 @@ class CartController extends Controller
         ], 200);
     }
 
-    public function destroy(Cart $cart){
+    public function destroy(Cart $cart)
+    {
 
-        if(!$cart->ownedBy(auth()->user())){
+        if (!$cart->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
         $cart->delete();
         return back();
     }
-
 }

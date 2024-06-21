@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['string_id', 'name', 'description', 'tags', 'unit', 'rating', 'orders', 'stock', 'price', 'delivery_min', 'delivery_max', 'thumbnail', 'created_at'];
+    protected $fillable = ['string_id', 'name', 'description', 'tags', 'unit', 'rating', 'order_limit', 'orders', 'stock', 'price', 'delivery_min', 'delivery_max', 'thumbnail', 'created_at'];
 
     protected $hidden = [
         'user_id',
@@ -48,6 +48,4 @@ class Product extends Model
     {
         return $this->hasOne(ProductUnit::class);
     }
-
-
 }

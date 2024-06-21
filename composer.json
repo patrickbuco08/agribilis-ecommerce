@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "agribilis/project",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Agribilis is an e-commerce platform for agri-fishery products in Cavite.",
     "keywords": [
         "framework",
         "laravel"
@@ -9,17 +9,21 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "algolia/scout-extended": "^2.1",
+        "elasticsearch/elasticsearch": "^8.13",
         "fakerphp/faker": "^1.19",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/sanctum": "^2.15",
+        "laravel/scout": "^9.8",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
+        "laravel/sail": "^1.25",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
@@ -27,7 +31,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "extra": {
         "laravel": {

@@ -28,7 +28,7 @@ class FakerController extends Controller
 
 
         $fakeUserInfo = [
-            'shop_name' => $faker->words(rand(1,4), true),
+            'shop_name' => $faker->words(rand(1, 4), true),
             'description' => $faker->words(80,  true),
             'location' => $faker->streetAddress,
             'phone' => $faker->phoneNumber,
@@ -46,12 +46,12 @@ class FakerController extends Controller
             $user = User::create($fakeUser);
 
             $user->info()->create($fakeUserInfo);
-    
+
             $user->role()->create($fakeUserRole);
 
-            for ($i=0; $i < 10; $i++) { 
-                
-                $product_name = $faker->words(rand(1,4), true);
+            for ($i = 0; $i < 10; $i++) {
+
+                $product_name = $faker->words(rand(1, 4), true);
 
                 $userProduct = $user->products()->create([
                     'string_id' => implode("-", explode(" ", strtolower($product_name))),
@@ -76,14 +76,12 @@ class FakerController extends Controller
                     ['name'                =>      $images[rand(0, 49)]]
                 ]);
 
-                $productReviews = [
+                $productReviews = [];
 
-                ];
-        
                 $mainCategory = Category::all()->random(1)->first();
                 $subCategory = $mainCategory->subCategory->random(1)->first();
                 $subSubCategory = !$subCategory->subSubCategory->isEmpty() ? $subCategory->subSubCategory->random(1)->first() : null;
-        
+
                 $productCategory = [
                     'category_id' => $mainCategory->id,
                     'subcategory_id' => $subCategory->id,
@@ -153,7 +151,6 @@ class FakerController extends Controller
 
             DB::commit();
             return $user;
-
         } catch (\Throwable $th) {
             DB::rollback();
             return $th;

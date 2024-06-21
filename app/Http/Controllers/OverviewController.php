@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 class OverviewController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware(['auth']);
     }
 
-    public function index(){
-
+    public function index()
+    {
         $items = auth()->user()->orderItems();
         $pendingOrders = $items->where('status.status_id', 1)->count();
         $confirmedOrders = $items->where('status.status_id', 2)->count();
@@ -20,7 +21,7 @@ class OverviewController extends Controller
         $deliveredOrders = $items->where('status.status_id', 4)->count();
         $cancelledOrders = $items->where('status.status_id', 5)->count();
 
-        return view('buyer.overview',[
+        return view('buyer.overview', [
             'recentOrders' => $items,
             'pendingOrders' => $pendingOrders,
             'confirmedOrders' => $confirmedOrders,

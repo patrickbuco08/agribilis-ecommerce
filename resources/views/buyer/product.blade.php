@@ -55,7 +55,9 @@
 
                     <dl class="row">
                         <dt class="col-sm-3">Shop</dt>
-                        <dd class="col-sm-9"><a href={{ route('vendor', $product->owner->full_name) }}>{{ $product->owner->info->shop_name }}</a></dd>
+                        <dd class="col-sm-9"><a
+                                href={{ route('vendor', $product->owner->full_name) }}>{{ $product->owner->info->shop_name }}</a>
+                        </dd>
 
                         <dt class="col-sm-3">Location</dt>
                         <dd class="col-sm-9">{{ $product->owner->info->location }}</dd>
@@ -75,32 +77,32 @@
                         </div>
                         <div class="form-group col-md">
                             @auth
-                                @if ($product->stock)
-                                <button type="submit" class="btn btn-success" id="buy-now"
+                            @if ($product->stock)
+                            <button type="submit" class="btn btn-success" id="buy-now"
                                 data-product-id={{$product->string_id}}><i class="fas fa-envelope"></i> <span
                                     class="text">Buy
                                     Now</span></button>
-    
-                                <button type="submit" class="btn btn-outline-success"
+
+                            <button type="submit" class="btn btn-outline-success"
                                 data-product-id={{$product->string_id}} id="add-to-cart"><i
                                     class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span></button>
-                                @else
-                                <button class="btn btn-outline-warning" disabled>
-                                    <i class="fas fa-shopping-cart"></i> Out of Stock
-                                </button>
-                                @endif
+                            @else
+                            <button class="btn btn-outline-warning" disabled>
+                                <i class="fas fa-shopping-cart"></i> Out of Stock
+                            </button>
+                            @endif
                             @endauth
 
                             @guest
-                                @if ($product->stock)
-                                <a class="btn btn-outline-success" href="{{ route('login') }}">
-                                    <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span>
-                                </a>
-                                @else
-                                <button class="btn btn-outline-warning" disabled>
-                                    <i class="fas fa-shopping-cart"></i> Out of Stock
-                                </button>
-                                @endif
+                            @if ($product->stock)
+                            <a class="btn btn-outline-success" href="{{ route('login') }}">
+                                <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span>
+                            </a>
+                            @else
+                            <button class="btn btn-outline-warning" disabled>
+                                <i class="fas fa-shopping-cart"></i> Out of Stock
+                            </button>
+                            @endif
                             @endguest
                         </div>
                     </div>
@@ -129,44 +131,44 @@
                     <h5 class="title-description">Related Products</h5>
                     <p>{{ $product->description }}</p>
 
-                    <h5 class="title-description">Videos</h5>
+            <h5 class="title-description">Videos</h5>
 
 
-                    <article class="media mb-3">
-                        <a href="#"><img class="img-sm mr-3" src={{route('product.image', '1.jpg')}}></a>
-                        <div class="media-body">
-                            <h6 class="mt-0"><a href="#">How to use this item</a></h6>
-                            <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante
-                                sollicitudin </p>
-                        </div>
-                    </article>
-
-                    <article class="media mb-3">
-                        <a href="#"><img class="img-sm mr-3" src={{route('product.image', '4.jpg')}}></a>
-                        <div class="media-body">
-                            <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>
-                            <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante
-                                sollicitudin </p>
-                        </div>
-                    </article>
-
-                    <article class="media mb-3">
-                        <a href="#"><img class="img-sm mr-3" src={{route('product.image', '2.jpg')}}></a>
-                        <div class="media-body">
-                            <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>
-                            <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                ante
-                                sollicitudin </p>
-                        </div>
-                    </article>
-
-
-
+            <article class="media mb-3">
+                <a href="#"><img class="img-sm mr-3" src={{route('product.image', '1.jpg')}}></a>
+                <div class="media-body">
+                    <h6 class="mt-0"><a href="#">How to use this item</a></h6>
+                    <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
+                        ante
+                        sollicitudin </p>
                 </div>
-            </aside> --}}
+            </article>
+
+            <article class="media mb-3">
+                <a href="#"><img class="img-sm mr-3" src={{route('product.image', '4.jpg')}}></a>
+                <div class="media-body">
+                    <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>
+                    <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
+                        ante
+                        sollicitudin </p>
+                </div>
+            </article>
+
+            <article class="media mb-3">
+                <a href="#"><img class="img-sm mr-3" src={{route('product.image', '2.jpg')}}></a>
+                <div class="media-body">
+                    <h6 class="mt-0"><a href="#">New tips and tricks</a></h6>
+                    <p class="mb-2"> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
+                        ante
+                        sollicitudin </p>
+                </div>
+            </article>
+
+
+
         </div>
+        </aside> --}}
+    </div>
 
     </div>
 </section>

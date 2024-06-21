@@ -30,6 +30,7 @@ class AddProductRequest extends FormRequest
             'unit' => 'required',
             'stock' => 'required|integer',
             'price' => 'required|integer',
+            'order_limit' => 'required|integer',
             'delivery_min' => 'required|integer',
             'delivery_max' => 'required|integer',
             'files' => 'required',

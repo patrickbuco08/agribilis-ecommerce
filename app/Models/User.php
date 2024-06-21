@@ -79,14 +79,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function orderItems(){
-        $orders = $this->orders->load(['items.product', 'items.status', 'items.status.info']);
         $items = collect([]);
+
+        $orders = $this->orders->load(['items.product', 'items.status', 'items.status.info']);
         
         foreach ($orders as $order) {
             foreach ($order->items as $item) {
                 $items->push($item);
             }
         }
+
         return $items;
     }
 

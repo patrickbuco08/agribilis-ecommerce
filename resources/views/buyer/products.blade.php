@@ -27,7 +27,7 @@
                                             'mainCategory' => $category->string_id,
                                             'price' => request()->get('price')
                                         ]) }}
-                                            class="@if($categorySearch['main'] == $category->string_id) text-success @endif">{{ $category->name }}
+                                            class="{{ $categorySearch['main'] == $category->string_id ? 'text-success' : '' }}">{{ $category->name }}
                                             <span
                                                 class="badge badge-pill badge-light float-right @if($categorySearch['main'] == $category->string_id) text-success @endif">
                                                 {{$category->products()}}
@@ -66,12 +66,14 @@
                                                 'price' => request()->get('price')
                                             ]) : '#' }}"
                                             class="@if($categorySearch['sub'] == $subCategory->string_id) text-success @endif">{{ $subCategory->name }}
-                                            <span class="badge badge-pill badge-light float-right @if($categorySearch['sub'] == $subCategory->string_id) text-success @endif">{{$subCategory->products()}}
+                                            <span
+                                                class="badge badge-pill badge-light float-right @if($categorySearch['sub'] == $subCategory->string_id) text-success @endif">{{$subCategory->products()}}
                                             </span>
                                         </a>
                                     </li>
                                     @empty
-                                    <li><a href="#">Crops <span class="badge badge-pill badge-light float-right">Empty</span></a></li>
+                                    <li><a href="#">Crops <span
+                                                class="badge badge-pill badge-light float-right">Empty</span></a></li>
                                     @endforelse
                                 </ul>
                             </div>
@@ -118,7 +120,7 @@
             </aside>
 
             <div class="col-md-9">
-                
+
                 <header class="border-bottom mb-4 pb-3">
                     <div class="form-inline">
                         <span class="mr-md-auto">{{$count}} {{Str::plural('Item', $count)}} found</span>
@@ -128,7 +130,8 @@
                             @endif
                             <select class="mr-2 form-control" name="price" onchange="this.form.submit()">
                                 <option value="low-to-high" selected>Price low to high </option>
-                                <option value="high-to-low" @if(request()->get('price') == "high-to-low") selected @endif>Price high to low</option>
+                                <option value="high-to-low" @if(request()->get('price') == "high-to-low") selected
+                                    @endif>Price high to low</option>
                             </select>
                         </form>
                     </div>

@@ -21,9 +21,10 @@ class ProductController extends Controller
         $this->middleware(['auth', 'verified'], ['only' => ['vendorIndex', 'storeProduct', 'productList']]);
     }
 
-    public function index(Request $request){
-
+    public function index(Request $request)
+    {
         $product = Product::with(['owner', 'owner.info', 'photos', 'reviews'])->where('string_id', $request->string_id)->firstOrFail();
+
         return view('buyer.product', [
             'product' => $product
         ]);
@@ -31,59 +32,63 @@ class ProductController extends Controller
 
     public function products(Request $request, $mainCategory = null, $subCategory = null, $subSubCategory = null)
     {
+
+        // return $request;
+
         $products = Product::with(['owner', 'owner.info', 'photos', 'reviews']);
         $categories = Cache::rememberForever('categories', function () {
             return Category::get();
         });
+
         $subCategories = null;
         $subSubCategories = null;
         $priceFilter = $request->has('price') && $request->price == "high-to-low" ? 'DESC' : 'ASC';
 
 
-        if($mainCategory){
-            $filtered = $categories->filter(function ($category) use($mainCategory) {
+        if ($mainCategory) {
+            $filtered = $categories->filter(function ($category) use ($mainCategory) {
                 return $category->string_id == $mainCategory;
             })->first();
 
             $subCategories = $filtered->subCategory;
         }
 
-        if($subCategory){
-            $filtered = $subCategories->filter(function($category) use($subCategory){
+        if ($subCategory) {
+            $filtered = $subCategories->filter(function ($category) use ($subCategory) {
                 return $category->string_id == $subCategory;
             })->first();
 
             $subSubCategories = $filtered->subSubCategory;
         }
 
-        if($mainCategory){
+        if ($mainCategory) {
 
             $products->with(['category']);
 
-            $products->whereHas('category.main', function($query) use($mainCategory){
+            $products->whereHas('category.main', function ($query) use ($mainCategory) {
                 $query->where('string_id', '=', $mainCategory);
             });
         }
 
-        if($subCategory){
-            $products->whereHas('category.sub', function($query) use($subCategory){
+        if ($subCategory) {
+            $products->whereHas('category.sub', function ($query) use ($subCategory) {
                 $query->where('string_id', '=', $subCategory);
             });
         }
 
-        if($subSubCategory){
-            $products->whereHas('category.subSub', function($query) use($subSubCategory){
+        if ($subSubCategory) {
+            $products->whereHas('category.subSub', function ($query) use ($subSubCategory) {
                 $query->where('string_id', '=', $subSubCategory);
             });
         }
 
-        if($request->has('search')){
-            $products->where('name', 'like', '%'.$request->search.'%');
+        if ($request->has('search')) {
+            $products->where('name', 'like', '%' . $request->search . '%');
         }
 
         $products->orderBy('price', $priceFilter);
 
-        return view('buyer.products',[
+        return view('buyer.products', [
             'count' => $products->count(),
             'products' => $products->paginate(9),
             'categories' => $categories,
@@ -103,7 +108,7 @@ class ProductController extends Controller
         $categories = Cache::rememberForever('categories', function () {
             return Category::get();
         });
-        return view('vendor.add-product',[
+        return view('vendor.add-product', [
             'categories' => $categories
         ]);
     }
@@ -111,7 +116,7 @@ class ProductController extends Controller
     public function productList()
     {
         $products = auth()->user()->products;
-        return view('vendor.product-list',[
+        return view('vendor.product-list', [
             'products' => $products
         ]);
     }
@@ -122,12 +127,12 @@ class ProductController extends Controller
             return Category::get();
         });
 
-        if(!$product->ownedBy(auth()->user())){
+        if (!$product->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
         $product->load(['category', 'photos']);
-        return view('vendor.edit-product',[
+        return view('vendor.edit-product', [
             'product' => $product,
             'categories' => $categories
         ]);
@@ -136,7 +141,7 @@ class ProductController extends Controller
     public function updateProduct(Request $request, Product $product)
     {
 
-        if(!$product->ownedBy(auth()->user())){
+        if (!$product->ownedBy(auth()->user())) {
             return response(null, 409);
         }
 
@@ -146,7 +151,7 @@ class ProductController extends Controller
     public function storeProduct(AddProductRequest $request)
     {
         $validated = $request->safe();
-        $validated->tags = collect(json_decode($validated->tags))->map(function($tag){
+        $validated->tags = collect(json_decode($validated->tags))->map(function ($tag) {
             return $tag->value;
         })->implode(", ");
 
@@ -156,11 +161,11 @@ class ProductController extends Controller
             $productPhotos = collect([]);
             foreach ($request->file('files') as $file) {
                 $original_filename = $file->getClientOriginalName();
-                $image_name = time().rand(1,100)."-".$file->getClientOriginalName();
+                $image_name = time() . rand(1, 100) . "-" . $file->getClientOriginalName();
                 $productPhotos->push([
                     'name' => $image_name
                 ]);
-                $file->storeAs('frontend/images/items', $image_name, 'product_storage'); 
+                $file->storeAs('frontend/images/items', $image_name, 'product_storage');
             }
 
             $product = auth()->user()->products()->create([
@@ -169,6 +174,7 @@ class ProductController extends Controller
                 'description'           =>  $validated->description,
                 'tags'                  =>  $validated->tags,
                 'unit'                  =>  $validated->unit,
+                'order_limit'           =>  $validated->order_limit,
                 'rating'                =>  60,
                 'orders'                =>  0,
                 'stock'                 =>  $validated->stock,
@@ -195,7 +201,8 @@ class ProductController extends Controller
         }
     }
 
-    public function viewImage($filename){
-        return Storage::get('public/product_images/'.$filename);
+    public function viewImage($filename)
+    {
+        return Storage::get('public/product_images/' . $filename);
     }
 }
