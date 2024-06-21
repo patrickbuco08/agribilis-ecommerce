@@ -1,24 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\FakerController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\AddressController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\OverviewController;
-use App\Http\Controllers\AboutPageController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\SocialController;
-use App\Http\Controllers\ContactPageController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Vendor\DashboardController;
-use App\Http\Controllers\EmailVerificationController;
+use Agribilis\Http\Controllers\CartController;
+use Agribilis\Http\Controllers\HomeController;
+use Agribilis\Http\Controllers\UserController;
+use Agribilis\Http\Controllers\FakerController;
+use Agribilis\Http\Controllers\OrderController;
+use Agribilis\Http\Controllers\AddressController;
+use Agribilis\Http\Controllers\ProductController;
+use Agribilis\Http\Controllers\CategoryController;
+use Agribilis\Http\Controllers\CheckoutController;
+use Agribilis\Http\Controllers\OverviewController;
+use Agribilis\Http\Controllers\AboutPageController;
+use Agribilis\Http\Controllers\Auth\LoginController;
+use Agribilis\Http\Controllers\Auth\LogoutController;
+use Agribilis\Http\Controllers\Auth\SocialController;
+use Agribilis\Http\Controllers\ContactPageController;
+use Agribilis\Http\Controllers\Auth\RegisterController;
+use Agribilis\Http\Controllers\Vendor\DashboardController;
+use Agribilis\Http\Controllers\EmailVerificationController;
 
 
 //CUSTOMER---------------------------------------------------------------------

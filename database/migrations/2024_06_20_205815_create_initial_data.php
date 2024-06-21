@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User;
-use App\Models\Category;
+use Agribilis\Models\User;
+use Agribilis\Models\Category;
 use Faker\Factory as Faker;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
