@@ -6,18 +6,37 @@ Welcome to **Agribilis**, a Laravel-based application. This repository includes 
 
 - Built with Laravel 8.
 - Dockerized with PHP-FPM, MySQL, and Nginx for easy containerized development.
-- Supports seamless local development and deployment workflows.
 
 ---
 
-## 🛠️ Prerequisites
+## Modify Your `/etc/hosts` File
 
-Before running the application, ensure you have the following installed:
-
-- [Docker](https://www.docker.com/) (v20.10+)
-- [Docker Compose](https://docs.docker.com/compose/) (v1.29+)
+- 127.0.0.1 agribilis.local
 
 ---
 
-## build the application
-- docker-compose up --build
+## Generate a Development SSL Certificate
+
+- ./ssl/generate_cert.sh
+
+---
+
+## Database Access
+
+- DB_HOST=database
+- DB_PORT=3306
+- DB_DATABASE=agribilis
+- DB_USERNAME=root
+- DB_PASSWORD=agriblis_password
+
+---
+
+## 🛠️ build the application
+
+- docker-compose up --build -d
+
+---
+
+## Access the Application
+
+https://agribilis.local/

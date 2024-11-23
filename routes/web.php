@@ -20,6 +20,9 @@ use Agribilis\Http\Controllers\Auth\RegisterController;
 use Agribilis\Http\Controllers\Vendor\DashboardController;
 use Agribilis\Http\Controllers\EmailVerificationController;
 
+Route::get('/hello', function () {
+    return 'Hello';
+});
 
 //CUSTOMER---------------------------------------------------------------------
 
