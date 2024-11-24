@@ -41,10 +41,10 @@ class CreateInitialData extends Migration
 
     private function doCreateUser()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('en_US');
         $fakeUser = [
             'full_name' => 'Patrick Demillo Buco',
-            'email' => 'jpbuco@cvsu.edu.ph',
+            'email' => 'admin@agribilis.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // password
             'remember_token' => Str::random(10),
@@ -103,7 +103,7 @@ class CreateInitialData extends Migration
 
     private function doCreateFakeProducts()
     {
-        $faker = Faker::create();
+        $faker = Faker::create('en_US');
 
         $user = [
             'full_name' => $faker->name(),

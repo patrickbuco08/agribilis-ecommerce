@@ -21,7 +21,6 @@ class HomeController extends Controller
 
         // return false;
 
-
         return view('welcome');
     }
 }

@@ -43,6 +43,9 @@ USER www-data
 RUN chmod a+x ./Docker/entrypoint.sh
 
 ENV PORT=9000
+
 EXPOSE 9000
+
 ENTRYPOINT [ "docker/entrypoint.sh" ]
+
 CMD ["php-fpm"]

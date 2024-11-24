@@ -11,6 +11,8 @@ services:
     container_name: agribilis-app
     volumes:
       - ./:/var/www
+    depends_on:
+      - database
     environment:
       - APP_ENV=${APP_ENV}
       - CONTAINER_ROLE=app

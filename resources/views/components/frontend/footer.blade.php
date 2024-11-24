@@ -4,7 +4,7 @@
             <div class="row">
                 <aside class="col-md-4">
                     <article class="mr-3">
-                        <img src={{ asset('frontend/images/logos/agribilis-logo.jpg') }} class="logo-footer">
+                        <img src={{ asset('agribilis-logo.jpg') }} class="logo-footer">
                         <p class="mt-3">A website and mobile based application that will help in the marketing and
                             distribution of agriculture
                             and fishery products in Cavite, linking the farmers, fishers, and traders to the consumers

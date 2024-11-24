@@ -27,7 +27,7 @@ Welcome to **Agribilis**, a Laravel-based application. This repository includes 
 - DB_PORT=3306
 - DB_DATABASE=agribilis
 - DB_USERNAME=root
-- DB_PASSWORD=agriblis_password
+- DB_PASSWORD=agribilis_password
 
 ---
 
