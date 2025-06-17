@@ -4,7 +4,7 @@ Welcome to **Agribilis**, a Laravel-based application. This repository includes 
 
 ## 🚀 Features
 
-- Built with Laravel 8.
+- Built with Laravel 11.
 - Dockerized with PHP-FPM, MySQL, and Nginx for easy containerized development.
 
 ---
@@ -57,4 +57,4 @@ docker-compose exec app php artisan migrate
 
 ## Access the Application
 
-https://agribilis.local:8000/
+https://agribilis.local/
