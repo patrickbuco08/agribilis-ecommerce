@@ -4,6 +4,7 @@ namespace Agribilis\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Blueprint\BlueprintServiceProvider;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if ($this->app->environment('local')) {
+            $this->app->register(BlueprintServiceProvider::class);
+        }
     }
 
     /**
